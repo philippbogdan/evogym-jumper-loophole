@@ -1,0 +1,59 @@
+diff --git a/evogym/simulator/SimulatorCPP/PhysicsEngine.cpp b/evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+index dc52630..797e3b1 100644
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+@@ -452,6 +452,7 @@ void PhysicsEngine::step_rk4(double dt) {
+ 	//temp(Eigen::all, Eigen::seqN(0, num_points)) = fixed->select(0.0f, temp(Eigen::all, Eigen::seqN(0, num_points)));
+ 	//temp(Eigen::all, Eigen::seqN(num_points, num_points)) = fixed->select(0.0f, temp(Eigen::all, Eigen::seqN(num_points, num_points)));
+ 
++	resolve_collisions_at_stage(temp.block(0, 0, 2, num_points));
+ 	Matrix <double, 2, Dynamic> k_2 = get_pos_vel_slope(temp, num_points) * dt;		//t + dt/2
+ 
+ 	//k3
+@@ -461,6 +462,7 @@ void PhysicsEngine::step_rk4(double dt) {
+ 	//temp(Eigen::all, Eigen::seqN(0, num_points)) = fixed->select(0.0f, temp(Eigen::all, Eigen::seqN(0, num_points)));
+ 	//temp(Eigen::all, Eigen::seqN(num_points, num_points)) = fixed->select(0.0f, temp(Eigen::all, Eigen::seqN(num_points, num_points)));
+ 
++	resolve_collisions_at_stage(temp.block(0, 0, 2, num_points));
+ 	Matrix <double, 2, Dynamic> k_3 = get_pos_vel_slope(temp, num_points) * dt;		//t + dt/2
+ 
+ 	//k4
+@@ -470,6 +472,7 @@ void PhysicsEngine::step_rk4(double dt) {
+ 	//temp(Eigen::all, Eigen::seqN(0, num_points)) = fixed->select(0.0f, temp(Eigen::all, Eigen::seqN(0, num_points)));
+ 	//temp(Eigen::all, Eigen::seqN(num_points, num_points)) = fixed->select(0.0f, temp(Eigen::all, Eigen::seqN(num_points, num_points)));
+ 
++	resolve_collisions_at_stage(temp.block(0, 0, 2, num_points));
+ 	Matrix <double, 2, Dynamic> k_4 = get_pos_vel_slope(temp, num_points) * dt;		//t
+ 
+ 	//APPLY UPDATE
+@@ -712,6 +715,18 @@ void PhysicsEngine::resolve_edge_constraints() {
+ 
+ }
+ 
++// contact forces recomputed at a Runge-Kutta stage: the stage positions of the free points
++// (fixed points stay where they are), the finite-difference velocities as at the step start;
++// afterwards the tree boxes are restored to the step-start positions.
++void PhysicsEngine::resolve_collisions_at_stage(Ref<Matrix <double, 2, Dynamic>> stage_pos) {
++	Matrix <double, 2, Dynamic> start_pos = *pos;
++	*pos = fixed->select(start_pos, stage_pos);
++	resolve_collisions();
++	*pos = start_pos;
++	for (int i = 0; i < objects->size(); i++)
++		objects->at(i)->recompute_bbs(*pos);
++}
++
+ void PhysicsEngine::resolve_collisions() {
+ 
+ 	for (int i = 0; i < objects->size(); i++) {
+diff --git a/evogym/simulator/SimulatorCPP/PhysicsEngine.h b/evogym/simulator/SimulatorCPP/PhysicsEngine.h
+index 471d54e..4e16756 100644
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.h
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.h
+@@ -84,6 +84,7 @@ public:
+ 	Matrix <double, 2, Dynamic> get_pos_vel_slope(Ref<Matrix <double, 2, Dynamic>> data, int num_points);
+ 	
+ 	void resolve_collisions();
++	void resolve_collisions_at_stage(Ref<Matrix <double, 2, Dynamic>> stage_pos);
+ 	void resolve_object_collisions(SimObject* object_a, BBTreeNode* a_node, SimObject* object_b, BBTreeNode* b_node, bool are_same);
+ 	bool is_any_robot_self_colliding();
+ 	int count_object_self_collisions(SimObject* object_a, BBTreeNode* a_node, SimObject* object_b, BBTreeNode* b_node);

@@ -1,0 +1,13 @@
+diff --git a/evogym/simulator/SimulatorCPP/Environment.cpp b/evogym/simulator/SimulatorCPP/Environment.cpp
+index 42e77e0..923697c 100644
+--- evogym/simulator/SimulatorCPP/Environment.cpp
++++ evogym/simulator/SimulatorCPP/Environment.cpp
+@@ -198,7 +198,7 @@ bool Environment::step() {
+ 
+ 
+ 
+-	return physics_handler.is_any_robot_self_colliding();
++	return false;
+ 
+ 	//physics_handler.step_euler(0.0000005);
+ 

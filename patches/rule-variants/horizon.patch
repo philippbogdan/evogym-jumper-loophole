@@ -1,0 +1,13 @@
+diff --git a/evogym/envs/__init__.py b/evogym/envs/__init__.py
+index 49e7efd..4d5bbfd 100644
+--- evogym/envs/__init__.py
++++ evogym/envs/__init__.py
+@@ -34,7 +34,7 @@ register(
+ register(
+     id = 'Jumper-v0',
+     entry_point = 'evogym.envs.jump:StationaryJump',
+-    max_episode_steps=500
++    max_episode_steps=1000
+ )
+ 
+ register(

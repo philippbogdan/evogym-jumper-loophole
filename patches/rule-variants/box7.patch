@@ -1,0 +1,13 @@
+diff --git a/evogym/envs/jump.py b/evogym/envs/jump.py
+index ac528cc..1edc810 100644
+--- evogym/envs/jump.py
++++ evogym/envs/jump.py
+@@ -22,6 +22,8 @@ class StationaryJump(BenchmarkBase):
+         render_options: Optional[Dict[str, Any]] = None,
+     ):
+ 
++        # rule-set admissibility
++        assert np.asarray(body).shape == (7, 7), 'the box is 7 x 7'
+         # make world
+         self.world = EvoWorld.from_json(os.path.join(self.DATA_PATH, 'Jumper-v0.json'))
+         self.world.add_from_array('robot', body, 32, 1, connections=connections)

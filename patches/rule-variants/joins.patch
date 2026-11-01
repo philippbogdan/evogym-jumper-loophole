@@ -1,0 +1,17 @@
+diff --git a/evogym/envs/jump.py b/evogym/envs/jump.py
+index ac528cc..629f802 100644
+--- evogym/envs/jump.py
++++ evogym/envs/jump.py
+@@ -22,6 +22,12 @@ class StationaryJump(BenchmarkBase):
+         render_options: Optional[Dict[str, Any]] = None,
+     ):
+ 
++        # rule-set admissibility
++        if connections is not None:  # any subset of the joins between occupied side neighbours
++            _b = np.asarray(body); _w = _b.shape[1]; _f = _b.flatten()
++            for _a, _c in np.asarray(connections).T:
++                _a, _c = int(min(_a, _c)), int(max(_a, _c))
++                assert _f[_a] != 0 and _f[_c] != 0 and ((_c - _a == 1 and _a % _w != _w - 1) or _c - _a == _w), 'join must be between occupied side neighbours'
+         # make world
+         self.world = EvoWorld.from_json(os.path.join(self.DATA_PATH, 'Jumper-v0.json'))
+         self.world.add_from_array('robot', body, 32, 1, connections=connections)

@@ -1,0 +1,3 @@
+cell,material,top_left_point,top_right_point,bottom_left_point,bottom_right_point
+7,horizontal muscle,0,1,2,3
+12,rigid,2,3,4,5

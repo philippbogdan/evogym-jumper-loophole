@@ -1,0 +1,33 @@
+diff --git a/evogym/simulator/SimulatorCPP/Environment.cpp b/evogym/simulator/SimulatorCPP/Environment.cpp
+index 42e77e0..9a0321c 100644
+--- evogym/simulator/SimulatorCPP/Environment.cpp
++++ evogym/simulator/SimulatorCPP/Environment.cpp
+@@ -187,13 +187,13 @@ bool Environment::step() {
+ 	physics_handler.resolve_collisions();
+ 	physics_handler.update_actuators();
+ 	// print_poses();
+-	physics_handler.step_rk4(0.0001);
++	physics_handler.step_rk4(0.00005);
+ 	// print_poses();
+ 	
+ 	//physics_handler.step_rk4(0.00000005);
+ 	//physics_handler.step_rk4(0.00001);
+ 	physics_handler.resolve_edge_constraints();
+-	physics_handler.update_true_vel(0.0001);
++	physics_handler.update_true_vel(0.00005);
+ 
+ 
+ 
+diff --git a/evogym/simulator/SimulatorCPP/Sim.cpp b/evogym/simulator/SimulatorCPP/Sim.cpp
+index c00cd42..61f4726 100644
+--- evogym/simulator/SimulatorCPP/Sim.cpp
++++ evogym/simulator/SimulatorCPP/Sim.cpp
+@@ -20,7 +20,7 @@ Sim::Sim()
+ 	//TODO: remove redundant variable
+ 
+ 	//SIMULATION SETTINGS
+-	physics_updates_per_step = 30;
++	physics_updates_per_step = 60;
+ }
+ 
+ void Sim::init(int x, int y) {

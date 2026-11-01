@@ -1,0 +1,15 @@
+diff --git a/evogym/simulator/SimulatorCPP/PhysicsEngine.cpp b/evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+index dc52630..3bb676d 100644
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+@@ -607,8 +607,8 @@ void PhysicsEngine::update_true_vel(double dt) {
+ }
+ void PhysicsEngine::resolve_edge_constraints() {
+ 
+-	double thresh_diff = 0.25;
+-	double thresh_diff_rigid = 0.03;
++	double thresh_diff = 0.5;
++	double thresh_diff_rigid = 0.06;
+ 
+ 	Array <double, 2, Dynamic> vec_q_to_p = (*pos)(Eigen::all, *a_index) - (*pos)(Eigen::all, *b_index);
+ 	Array <double, 1, Dynamic> dist = (vec_q_to_p.row(0).square() + vec_q_to_p.row(1).square()).sqrt();

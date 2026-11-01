@@ -1,0 +1,26 @@
+diff --git a/evogym/envs/base.py b/evogym/envs/base.py
+index 82022ce..5ad6596 100644
+--- evogym/envs/base.py
++++ evogym/envs/base.py
+@@ -52,7 +52,7 @@ class EvoGymBase(gym.Env):
+         """
+         #step
+         for robot_name, a in action.items():
+-            a = np.clip(a, 0.6, 1.6)
++            a = np.clip(a, 0.475, 1.725)
+             a[abs(a) < 1e-8] = 0
+             self._sim.set_action(robot_name, a)
+         done = self._sim.step()
+diff --git a/evogym/envs/jump.py b/evogym/envs/jump.py
+index ac528cc..0ad7c37 100644
+--- evogym/envs/jump.py
++++ evogym/envs/jump.py
+@@ -34,7 +34,7 @@ class StationaryJump(BenchmarkBase):
+         num_robot_points = self.object_pos_at_time(self.get_time(), "robot").size
+         self.sight_dist = 2
+ 
+-        self.action_space = spaces.Box(low= 0.6, high=1.6, shape=(num_actuators,), dtype=float)
++        self.action_space = spaces.Box(low= 0.475, high=1.725, shape=(num_actuators,), dtype=float)
+         self.observation_space = spaces.Box(low=-100.0, high=100.0, shape=(2 + num_robot_points + (self.sight_dist*2 +1),), dtype=float)
+ 
+     def step(self, action):
