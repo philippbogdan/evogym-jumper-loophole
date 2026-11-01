@@ -1,10 +1,12 @@
 # Where Jumper-v0 gets its lift
 
-Check in minutes whether a high Jumper-v0 score comes from jumping or from the simulator's floor: **an estimated 97.2% of the best score found comes from a contact loophole**. A two-cell robot scores **514.48** in unmodified Evolution Gym; the best design found with the loophole closed scores **14.20**.
+Evolution Gym is an open benchmark for designing soft robots' bodies and controllers together (Bhatia et al., NeurIPS 2021). Each robot is a small grid of cells: empty, rigid, soft, or a muscle that stretches horizontally or vertically. In Jumper-v0, a robot of up to 5 × 5 cells on flat ground gets 500 muscle commands and earns 10 points per metre its centre of mass rises, minus a penalty for sideways movement. The simulator represents cell corners as point masses joined by springs, advances them in time steps of 0.0001 s, and handles contact with a penalty force that grows as a point penetrates another cell. Here, a two-cell robot sinks into the floor and is thrown 51 m upwards, giving the best score found: **514.48**. With this contact loophole closed, the best design found is a different robot scoring **14.20**, putting the estimated share of the best score attributable to the loophole at **about 97%**.
 
 [![Two-cell launch, height histories and ground work.](figures/launch.gif)](figures/launch.mp4)
 
 The two-cell robot sinks into the floor, then its centre of mass rises 51.45 m. The animation is slowed through the 12-step release so you can see it.
+
+Check in minutes whether a high Jumper-v0 score comes from jumping or from the simulator's floor: **an estimated 97.2% of the best score found comes from a contact loophole**. A two-cell robot scores **514.48** in unmodified Evolution Gym; the best design found with the loophole closed scores **14.20**.
 
 ## How the floor launches the robot
 
