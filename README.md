@@ -40,12 +40,11 @@ Alongside scores, measure how far a robot enters the floor and how much energy t
 
 The environment and simulator are [Evolution Gym](https://github.com/EvolutionGym/evogym), commit `f63c649`. Credit: J. S. Bhatia, H. Jackson, Y. Tian, J. Xu and W. Matusik, *Evolution Gym: A Large-Scale Benchmark for Evolving Soft Robots*, NeurIPS 2021 ([paper](https://arxiv.org/abs/2201.09863)).
 
-## What this does not show
+## Assumptions made
 
-- The best-found scores are lower bounds, not limits. The percentage is an estimate, and the closed searches were smaller.
-- The patch isolates the mechanism; it is not a proposed benchmark repair.
-- The energy account checks the simulator's transfers, not physical conservation.
-- Exact results are verified on x86-64 Linux with glibc. Some designs change substantially on a Mac; see [platform results](REPRODUCE.md#platform-agreement).
+- The [estimated loophole share](REPRODUCE.md#what-the-score-measures) is the proportional drop from the best-found stock score to the best-found closed score, using the [closing patch](patches/README.md) to isolate missed contact.
+- Energy contributions are assigned from the [simulator's numerical updates](REPRODUCE.md#account-for-the-energy).
+- Exact results use [x86-64 Linux with glibc](REPRODUCE.md#platform-agreement) as the reference platform.
 
 ## How to use it
 

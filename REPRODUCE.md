@@ -68,7 +68,7 @@ python scripts/check.py
 
 This adds `-ffp-contract=off` to the simulator and accounting builds, including contact logging, and links `platform/ref_tanh.c`. The file ports the fdlibm `tanh`/`expm1` algorithm with the operation order used by glibc's generic double-precision code. It removes the friction calculation's dependence on the system `tanh` without modifying Evolution Gym's source. The reference-maths object also needs a C compiler; see [its purpose and licence](platform/README.md).
 
-`REFERENCE_MATH=1` has so far been verified only on x86-64 Linux, where the result is exact as above. It was not measured on the Apple M4 because the shared build queue could not run it in time. On Apple silicon, the default build reproduces the main launch to seven significant figures, but not the sensitive designs listed above; the reference maths option has not yet been shown to resolve those differences.
+`REFERENCE_MATH=1` has so far been verified only on x86-64 Linux, where the result is exact as above. It was not measured on the Apple M4. On Apple silicon, the default build reproduces the main launch to seven significant figures, but not the sensitive designs listed above; the reference maths option has not yet been shown to resolve those differences.
 
 ### Tolerance-based comparisons
 
