@@ -1,0 +1,6 @@
+numpy==1.26.4
+gymnasium==1.4.0
+pybind11==3.1.0
+cmake>=3.18
+setuptools<70
+pytest

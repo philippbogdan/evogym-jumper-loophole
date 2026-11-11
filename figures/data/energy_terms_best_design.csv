@@ -1,0 +1,10 @@
+term,work_J
+muscle spring work,450.13760046772876
+passive spring work,-17740.368758119537
+drag,-2322.7473145383888
+gravity work,-33957.33185007522
+ground normal,59640.99332394574
+ground damping,-6056.753662624673
+ground friction,-12.678135733179005
+ground penalty (y<0),146.4554794202425
+potential change in RK4 step,33957.33847370619

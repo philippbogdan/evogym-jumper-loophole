@@ -1,0 +1,79 @@
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+@@ -4,6 +4,18 @@
+ #include <set>
+ #include <map>
+ #include <unordered_set>
++
++// probe: counts robot points inside fixed terrain that receive no contact force; it changes no arithmetic
++static std::vector<int> probe_applied;
++static std::vector<double> probe_missed;
++static long probe_point_steps = 0, probe_pairs = 0;
++static double probe_depth = 0.0;
++extern "C" __attribute__((visibility("default"))) void evogym_probe_read(long* point_steps, double* depth, long* pairs) {
++	*point_steps = probe_point_steps; *depth = probe_depth; *pairs = probe_pairs;
++}
++extern "C" __attribute__((visibility("default"))) void evogym_probe_reset() {
++	probe_point_steps = 0; probe_pairs = 0; probe_depth = 0.0;
++}
+ 
+ PhysicsEngine::PhysicsEngine()
+ {
+@@ -739,11 +751,19 @@
+ 
+ 	collision_forces = MatrixXd::Zero(2, pos->cols());
+ 	collision_vels = MatrixXd::Zero(2, pos->cols());
++	probe_applied.assign(pos->cols(), 0);
++	probe_missed.assign(pos->cols(), 0.0);
+ 	for (int i = 0; i < objects->size(); i++) {
+ 		for (int j = i; j < objects->size(); j++) {
+ 			// if (i == j)
+ 			// 	continue;
+ 			resolve_object_collisions(objects->at(i), &objects->at(i)->nodes[objects->at(i)->tree_root], objects->at(j), &objects->at(j)->nodes[objects->at(j)->tree_root], i==j);
++		}
++	}
++	for (int p = 0; p < pos->cols(); p++) {
++		if (probe_missed[p] > 0.0 && probe_applied[p] == 0) {
++			probe_point_steps++;
++			if (probe_missed[p] > probe_depth) probe_depth = probe_missed[p];
+ 		}
+ 	}
+ 
+@@ -1023,6 +1043,37 @@
+ 
+ 	//set normal forces
+ 
++	// probe: a free point strictly inside a fixed cell, with or without an edge to be pushed along
++	if (!(*fixed)(0, p_index) && (*fixed)(0, (int)ref->points[0])) {
++		double px = (*pos)(0, p_index), py = (*pos)(1, p_index);
++		double x0 = px, x1 = px, y0 = py, y1 = py;
++		for (int k = 0; k < ref->points.size(); k++) {
++			double qx = (*pos)(0, (int)ref->points[k]), qy = (*pos)(1, (int)ref->points[k]);
++			if (k == 0) { x0 = x1 = qx; y0 = y1 = qy; }
++			x0 = std::min(x0, qx); x1 = std::max(x1, qx); y0 = std::min(y0, qy); y1 = std::max(y1, qy);
++		}
++		if (px > x0 && px < x1 && py > y0 && py < y1) {
++			if (ref_edges_index.size() > 0) probe_applied[p_index]++;
++			else {
++				probe_pairs++;
++				// its depth: the distance to the nearest surface edge of any fixed terrain
++				double d = -1.0;
++				for (int i = 0; i < edges->size(); i++) {
++					Edge& e = edges->at(i);
++					if (!e.isOnSurface || !(*fixed)(0, e.a_index) || !(*fixed)(0, e.b_index)) continue;
++					double ax = (*pos)(0, e.a_index), ay = (*pos)(1, e.a_index), bx = (*pos)(0, e.b_index), by = (*pos)(1, e.b_index);
++					if (ay < 1e-9 && by < 1e-9) continue;  // the world's bottom is no way out
++					double ux = bx - ax, uy = by - ay, len2 = ux * ux + uy * uy;
++					double t = len2 > 0.0 ? ((px - ax) * ux + (py - ay) * uy) / len2 : 0.0;
++					t = t < 0.0 ? 0.0 : (t > 1.0 ? 1.0 : t);
++					double dx = px - (ax + t * ux), dy = py - (ay + t * uy);
++					double di = std::sqrt(dx * dx + dy * dy);
++					if (d < 0.0 || di < d) d = di;
++				}
++				if (d > probe_missed[p_index]) probe_missed[p_index] = d;
++			}
++		}
++	}
+ 	if (ref_edges_index.size() == 0)
+ 		return;
+ 

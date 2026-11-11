@@ -1,0 +1,26 @@
+diff --git a/evogym/envs/__init__.py b/evogym/envs/__init__.py
+index 49e7efd..4d5bbfd 100644
+--- evogym/envs/__init__.py
++++ evogym/envs/__init__.py
+@@ -34,7 +34,7 @@ register(
+ register(
+     id = 'Jumper-v0',
+     entry_point = 'evogym.envs.jump:StationaryJump',
+-    max_episode_steps=500
++    max_episode_steps=1000
+ )
+ 
+ register(
+diff --git a/evogym/simulator/SimulatorCPP/Sim.cpp b/evogym/simulator/SimulatorCPP/Sim.cpp
+index c00cd42..c804fc6 100644
+--- evogym/simulator/SimulatorCPP/Sim.cpp
++++ evogym/simulator/SimulatorCPP/Sim.cpp
+@@ -20,7 +20,7 @@ Sim::Sim()
+ 	//TODO: remove redundant variable
+ 
+ 	//SIMULATION SETTINGS
+-	physics_updates_per_step = 30;
++	physics_updates_per_step = 15;
+ }
+ 
+ void Sim::init(int x, int y) {

@@ -1,0 +1,13 @@
+diff --git a/evogym/envs/jump.py b/evogym/envs/jump.py
+index ac528cc..1d7cd36 100644
+--- evogym/envs/jump.py
++++ evogym/envs/jump.py
+@@ -58,7 +58,7 @@ class StationaryJump(BenchmarkBase):
+         # compute reward
+         com_1 = np.mean(pos_1, 1)
+         com_2 = np.mean(pos_2, 1)
+-        reward = (com_2[1] - com_1[1])*10 - abs(com_2[0] - com_1[0])*5
++        reward = (com_2[1] - com_1[1])*10 - abs(com_2[0] - com_1[0])*0
+         
+         # error check unstable simulation
+         if done:

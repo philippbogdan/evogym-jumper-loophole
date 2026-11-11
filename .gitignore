@@ -1,0 +1,7 @@
+build
+build/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+results/numbers.json

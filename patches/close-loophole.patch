@@ -1,0 +1,81 @@
+diff --git evogym/simulator/SimulatorCPP/PhysicsEngine.cpp evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+index dc52630..db99f19 100644
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+@@ -1023,6 +1023,25 @@ void PhysicsEngine::resolve_point_boxel_collisions(int p_index, Boxel* main, Box
+ 
+ 	//set normal forces
+ 
++	//a point inside a fixed boxel can have neither of its own edges crossing a surface edge of that boxel (e.g. when its
++	//side edge crosses the top of the neighboring boxel instead); left without a force it sinks, so use the nearest surface
++	//edge, if the point is within half a boxel of it (one farther from all of them is nearer a side shared with another boxel)
++	if (ref_edges_index.size() == 0 && !(*fixed)(0, p_index) && (*fixed)(0, ref->point_top_left_index)) {
++		//point_in_boxel also accepts points on the line through its diagonal, so check the point is within the boxel
++		BoundingBox ref_bbox = ref->get_bounding_box(*pos);
++		Vector2d p = pos->col(p_index);
++		double half_size = (ref_bbox.max_pos.y() - ref_bbox.min_pos.y()) / 2;
++		if (p.x() >= ref_bbox.min_pos.x() && p.x() <= ref_bbox.max_pos.x() && p.y() >= ref_bbox.min_pos.y() && p.y() <= ref_bbox.max_pos.y()) {
++			for (int i = 0; i < ref->edges.size(); i++) {
++				double dist = dist_point_edge(p_index, ref->edges[i]);
++				if (edges->at(ref->edges[i]).isOnSurface && dist < half_size) {
++					ref_edges_index.push_back(ref->edges[i]);
++					ref_edges_score.push_back(dist);
++				}
++			}
++		}
++	}
++
+ 	if (ref_edges_index.size() == 0)
+ 		return;
+ 
+diff --git tests/screen_free/test_ground_contact.py tests/screen_free/test_ground_contact.py
+new file mode 100644
+index 0000000..9fb1231
+--- /dev/null
++++ tests/screen_free/test_ground_contact.py
+@@ -0,0 +1,45 @@
++import gymnasium as gym
++import numpy as np
++import pytest
++
++import evogym.envs
++from evogym import VOXEL_TYPES
++
++# (action, number of steps): a horizontal muscle on a rigid voxel, squeezed so that its bottom
++# corners slip into the neighboring ground voxels while its sides cross the top of the one between
++ACTIONS = [
++    (0.7800052091400137, 2),
++    (1.160452179980335, 14),
++    (1.2479329293224728, 30),
++    (0.942821476132681, 14),
++]
++
++@pytest.mark.lite
++def test_robot_does_not_sink_into_ground():
++    """
++    - A robot point inside a ground voxel is pushed out, even when neither of its own edges crosses that voxel's top
++    """
++
++    body = np.zeros((5, 5))
++    body[1, 2] = VOXEL_TYPES['H_ACT']
++    body[2, 2] = VOXEL_TYPES['RIGID']
++    env = gym.make("Jumper-v0", body=body)
++    env.reset(seed=None, options=None)
++    sim = env.unwrapped
++
++    robot_pos = sim.object_pos_at_time(sim.get_time(), "robot")
++    ground_pos = sim.object_pos_at_time(sim.get_time(), "ground")
++    under_robot = (ground_pos[0] >= robot_pos[0].min()) & (ground_pos[0] <= robot_pos[0].max())
++    ground_top = ground_pos[1][under_robot].max()
++
++    max_depth = 0.0
++    for action, n_steps in ACTIONS:
++        for _ in range(n_steps):
++            env.step(np.array([action]))
++            robot_pos = sim.object_pos_at_time(sim.get_time(), "robot")
++            max_depth = max(max_depth, ground_top - robot_pos[1].min())
++
++    env.close()
++
++    # a voxel is 0.1 deep; ordinary contact lets a point in by a few millimeters
++    assert max_depth < 0.05, f"Robot sank {max_depth:.4f} into the ground, expected less than 0.05"

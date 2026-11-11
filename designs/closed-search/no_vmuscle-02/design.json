@@ -1,0 +1,42 @@
+{
+ "body": [
+  [
+   2,
+   3,
+   2,
+   3,
+   2
+  ],
+  [
+   3,
+   2,
+   3,
+   2,
+   3
+  ],
+  [
+   2,
+   3,
+   2,
+   3,
+   2
+  ],
+  [
+   3,
+   2,
+   3,
+   2,
+   3
+  ],
+  [
+   2,
+   3,
+   2,
+   3,
+   2
+  ]
+ ],
+ "connections": null,
+ "actions": "actions.npy",
+ "rules": "no_vmuscle, loophole closed"
+}

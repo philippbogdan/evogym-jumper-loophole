@@ -1,0 +1,17 @@
+diff --git a/evogym/simulator/SimulatorCPP/PhysicsEngine.cpp b/evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+index dc52630..011bd37 100644
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+@@ -1023,6 +1023,12 @@ void PhysicsEngine::resolve_point_boxel_collisions(int p_index, Boxel* main, Box
+ 
+ 	//set normal forces
+ 
++	// analysis: a robot point inside a ground cell with no viable edge is pushed out through the cell's top edge
++	if (ref_edges_index.size() == 0 && !(*fixed)(0, p_index) && (*fixed)(0, (int)ref->points[0])
++		&& edges->at(ref->edges[0]).isOnSurface) {
++		ref_edges_index.push_back(ref->edges[0]);
++		ref_edges_score.push_back(dist_point_edge(p_index, ref->edges[0]));
++	}
+ 	if (ref_edges_index.size() == 0)
+ 		return;
+ 

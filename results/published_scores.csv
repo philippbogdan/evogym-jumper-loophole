@@ -1,0 +1,11 @@
+source,year,where,what,score,body,note,url
+"Bhatia et al., Evolution Gym (NeurIPS 2021)",2021,"arXiv v1, figure 40","genetic algorithm with PPO, best so far, mean of 3 seeds, at the end of the run",5,5x5,"read off the plot: the paper prints no number for this task",https://arxiv.org/abs/2201.09863
+"Evolution Gym authors, dataset EvoGym/robots",2025,"reward field, 2,578 Jumper-v0 rows","best released robot (CPPN-NEAT)",10.17,5x5,"best genetic-algorithm robot in the dataset: 5.43",https://huggingface.co/datasets/EvoGym/robots
+"Evolution Gym authors, dataset EvoGym/robots-with-policies",2025,"reward field, 78 Jumper-v0 rows","the same robot, evaluated again by the authors",7.28,5x5,"best genetic-algorithm robot: 4.86",https://huggingface.co/datasets/EvoGym/robots-with-policies
+"Wang et al., CuCo (ICLR 2023)",2023,"table 1","CuCo, mean and standard error of 7 runs",13.08,7x7,"7x7 body and its own observation and action interface; its baselines score 0.79 to 3.82",https://openreview.net/forum?id=r9fX833CsuN
+"Wang et al., CuCo (ICLR 2023)",2023,"figure 16","CuCo, one robot, mean of 5 tests",14.50,7x7,"a block of vertical muscles",https://openreview.net/forum?id=r9fX833CsuN
+"Dong et al., HERD (ICLR 2024)",2024,"table 2","HERD, mean of 4 seeds",2.71,5x5,"its handcrafted robot: 3.15; its other baselines: -2.49 to 0.30",https://arxiv.org/abs/2311.00462
+"Liu et al., AIEA (IEEE TEVC 2024)",2024,"table I","genetic algorithm, mean of 5 runs of 100 evaluations",0.81,5x5,"AIEA itself: 0.46",https://doi.org/10.1109/TEVC.2023.3327459
+"Wang et al., Auto-Robotist (EMNLP 2026)",2026,"table 1","Auto-Robotist, mean of 3 seeds",6.67,5x5,"its genetic-algorithm baseline: 5.58; with a 10x10 body, table 2: 7.24",https://aclanthology.org/2026.emnlp-main.368
+"Song et al., MISCo (arXiv 2609.29491)",2026,"figure 5a","MISCo-A, best fitness at the end of evolution",9.17,5x5,"its baselines: 3.29 to 8.56. Its table II prints 27.62 to 47.47 in rows labelled Jumper-v0; those are its Flipper-v0 values under a swapped label (9.17 and 6.37 appear there as Flipper-v0)",https://arxiv.org/abs/2609.29491
+"Han et al., tabular foundation models as surrogates (arXiv 2609.18130)",2026,"table S-IX","best of four methods, mean of 5 runs of 100 evaluations",2.24,5x5,"the others: 1.61, 2.03, 2.03",https://arxiv.org/abs/2609.18130

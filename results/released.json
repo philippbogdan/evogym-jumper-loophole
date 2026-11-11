@@ -1,0 +1,245 @@
+{
+ "robots": 90563,
+ "tasks": {
+  "AreaMaximizer-v0": {
+   "robots": 1408,
+   "best_reward": 2.993695,
+   "best_uid": "f517c372-e317-41d1-a29d-c95f0b2c65b9",
+   "second_best_reward": 2.977407,
+   "robots_with_policies": 59
+  },
+  "AreaMinimizer-v0": {
+   "robots": 1395,
+   "best_reward": 1.121132,
+   "best_uid": "7302205d-93ec-4f4d-8d18-1d50e6d3bdbe",
+   "second_best_reward": 1.099035,
+   "robots_with_policies": 67
+  },
+  "Balancer-v0": {
+   "robots": 1423,
+   "best_reward": 0.177966,
+   "best_uid": "a4d58b25-adbc-4dd8-aaf8-7d02bc1f59b6",
+   "second_best_reward": 0.169814,
+   "robots_with_policies": 61
+  },
+  "Balancer-v1": {
+   "robots": 4423,
+   "best_reward": 0.745409,
+   "best_uid": "6cda8fe1-ede9-4400-a2a3-164f12efa514",
+   "second_best_reward": 0.726574,
+   "robots_with_policies": 70
+  },
+  "BeamSlider-v0": {
+   "robots": 3900,
+   "best_reward": 2.741682,
+   "best_uid": "ce3ae9f4-3c96-4a75-808b-fa7b9dab861d",
+   "second_best_reward": 2.719952,
+   "robots_with_policies": 163
+  },
+  "BeamToppler-v0": {
+   "robots": 2137,
+   "best_reward": 9.797129,
+   "best_uid": "9b9bf2bd-ddf3-4845-a708-cfcdb3de9a63",
+   "second_best_reward": 9.688686,
+   "robots_with_policies": 72
+  },
+  "BidirectionalWalker-v0": {
+   "robots": 2824,
+   "best_reward": 12.230644,
+   "best_uid": "51a2b48f-4b66-4014-9e09-49c6bf2a0187",
+   "second_best_reward": 10.921365,
+   "robots_with_policies": 84
+  },
+  "BridgeWalker-v0": {
+   "robots": 1242,
+   "best_reward": 6.646815,
+   "best_uid": "8386bdce-cb03-4a9f-8aea-9db7fdf26fc5",
+   "second_best_reward": 6.631599,
+   "robots_with_policies": 34
+  },
+  "Carrier-v0": {
+   "robots": 4270,
+   "best_reward": 10.936508,
+   "best_uid": "8781d3ee-7085-4e8b-9b97-37b73ca12943",
+   "second_best_reward": 10.885856,
+   "robots_with_policies": 203
+  },
+  "Carrier-v1": {
+   "robots": 2045,
+   "best_reward": 3.666956,
+   "best_uid": "1563d211-adf3-4187-9ad3-317d78d0788d",
+   "second_best_reward": 3.664635,
+   "robots_with_policies": 89
+  },
+  "Catcher-v0": {
+   "robots": 5012,
+   "best_reward": -0.9413636000000001,
+   "best_uid": "7eb3f9c1-8623-4906-8b5d-78bf40c71ff0",
+   "second_best_reward": -1.1774777,
+   "robots_with_policies": 32
+  },
+  "CaveCrawler-v0": {
+   "robots": 2158,
+   "best_reward": 6.358413,
+   "best_uid": "df4ba39c-2c8d-46c0-b145-febc68686241",
+   "second_best_reward": 6.344597,
+   "robots_with_policies": 102
+  },
+  "Climber-v0": {
+   "robots": 3417,
+   "best_reward": 9.273143,
+   "best_uid": "cca8b49a-1ff0-405d-af77-4e604c4b5d54",
+   "second_best_reward": 5.49141,
+   "robots_with_policies": 166
+  },
+  "Climber-v1": {
+   "robots": 2162,
+   "best_reward": 4.133293,
+   "best_uid": "f138c9e8-bfc5-4897-842f-81d3bc6e2e5f",
+   "second_best_reward": 4.031216,
+   "robots_with_policies": 26
+  },
+  "Climber-v2": {
+   "robots": 2162,
+   "best_reward": 1.868442,
+   "best_uid": "fdf583c9-7f24-400d-ba7e-e4caa314d609",
+   "second_best_reward": 1.865249,
+   "robots_with_policies": 67
+  },
+  "DownStepper-v0": {
+   "robots": 1845,
+   "best_reward": 9.16873,
+   "best_uid": "096e467c-9650-4eb0-ac64-3fbe120952ca",
+   "second_best_reward": 9.16322,
+   "robots_with_policies": 46
+  },
+  "Flipper-v0": {
+   "robots": 2636,
+   "best_reward": 64.189775,
+   "best_uid": "67cd63dc-2b35-45b0-bf9e-442cd9d638f2",
+   "second_best_reward": 61.778004,
+   "robots_with_policies": 129
+  },
+  "GapJumper-v0": {
+   "robots": 2624,
+   "best_reward": 8.043451,
+   "best_uid": "962e20f2-196f-4889-95ac-15f1d58e597f",
+   "second_best_reward": 7.96374,
+   "robots_with_policies": 46
+  },
+  "HeightMaximizer-v0": {
+   "robots": 1404,
+   "best_reward": 0.523335,
+   "best_uid": "264db0c2-eb0c-4ede-adb9-2e35a303ee1d",
+   "second_best_reward": 0.519529,
+   "robots_with_policies": 24
+  },
+  "Hurdler-v0": {
+   "robots": 2136,
+   "best_reward": 6.025891,
+   "best_uid": "17d121b4-215d-4d23-96bf-5a077436645f",
+   "second_best_reward": 4.718986,
+   "robots_with_policies": 39
+  },
+  "Jumper-v0": {
+   "robots": 2578,
+   "best_reward": 10.173303,
+   "best_uid": "18c0b771-e511-4c76-9621-c3a9a127a433",
+   "second_best_reward": 8.711125,
+   "robots_with_policies": 78
+  },
+  "Lifter-v0": {
+   "robots": 8068,
+   "best_reward": 3.633128,
+   "best_uid": "b5f5a19a-9d12-4269-b83c-edfd0229b00a",
+   "second_best_reward": 3.317122,
+   "robots_with_policies": 155
+  },
+  "ObstacleTraverser-v0": {
+   "robots": 2547,
+   "best_reward": 9.483272,
+   "best_uid": "ebcf8b59-6ea2-420a-bb80-150172cd022b",
+   "second_best_reward": 9.474151,
+   "robots_with_policies": 27
+  },
+  "ObstacleTraverser-v1": {
+   "robots": 2148,
+   "best_reward": 5.169558,
+   "best_uid": "99968c80-cd42-4997-8c71-bcc88f558283",
+   "second_best_reward": 5.166843,
+   "robots_with_policies": 46
+  },
+  "PlatformJumper-v0": {
+   "robots": 2155,
+   "best_reward": 7.088313,
+   "best_uid": "e1641a35-74b4-4deb-85c3-c59ab5ee5e5b",
+   "second_best_reward": 6.937677,
+   "robots_with_policies": 59
+  },
+  "Pusher-v0": {
+   "robots": 2146,
+   "best_reward": 9.525968,
+   "best_uid": "f7dbccd7-1fdf-4ff1-b8af-4fc3cfde2783",
+   "second_best_reward": 9.475405,
+   "robots_with_policies": 63
+  },
+  "Pusher-v1": {
+   "robots": 2152,
+   "best_reward": 8.213863,
+   "best_uid": "2fef52b8-0e15-4605-8d3a-4ece297e6262",
+   "second_best_reward": 8.207988,
+   "robots_with_policies": 67
+  },
+  "Thrower-v0": {
+   "robots": 3716,
+   "best_reward": 6.204169,
+   "best_uid": "45707d90-8d38-4087-ae42-9b5a75a04ed9",
+   "second_best_reward": 5.550638,
+   "robots_with_policies": 150
+  },
+  "Traverser-v0": {
+   "robots": 5704,
+   "best_reward": 7.574139,
+   "best_uid": "1b397c0b-44fa-4e93-8222-e8d8608ad41e",
+   "second_best_reward": 7.565004,
+   "robots_with_policies": 22
+  },
+  "UpStepper-v0": {
+   "robots": 4257,
+   "best_reward": 8.612326,
+   "best_uid": "01c13033-91b7-43d4-8a58-bdc73df2046a",
+   "second_best_reward": 8.606063,
+   "robots_with_policies": 92
+  },
+  "Walker-v0": {
+   "robots": 3066,
+   "best_reward": 10.657109,
+   "best_uid": "67efbfd4-6719-4d61-8813-3a9824380c26",
+   "second_best_reward": 10.65695,
+   "robots_with_policies": 151
+  },
+  "WingspanMazimizer-v0": {
+   "robots": 1403,
+   "best_reward": 0.907029,
+   "best_uid": "b3e494a6-9eda-4bce-b533-9fb4af16be80",
+   "second_best_reward": 0.903302,
+   "robots_with_policies": 64
+  }
+ },
+ "jumper_robots": 2578,
+ "jumper_best_reward": 10.173303,
+ "jumper_best_uid": "18c0b771-e511-4c76-9621-c3a9a127a433",
+ "jumper_best_generated_by": "CPPN-NEAT",
+ "jumper_by_method": {
+  "CPPN-NEAT": {
+   "robots": 430,
+   "best_reward": 10.173303
+  },
+  "Genetic Algorithm": {
+   "robots": 2148,
+   "best_reward": 5.431823
+  }
+ },
+ "robots_with_policies": 2553,
+ "jumper_robots_with_policies": 78
+}

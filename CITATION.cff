@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If this helped, cite it."
+type: software
+title: "514.48 on Jumper-v0 without jumping: a contact loophole in Evolution Gym"
+abstract: "A two-cell robot scores 514.48 on Evolution Gym's Jumper-v0 by falling through the floor and being thrown out by it. An estimated 97% of the score comes from an unhandled case in the simulator's contact routine; with that case closed the best design found scores 13.83. The same robot, unchanged, also reaches the top of Climber-v0 and Climber-v1. The repository holds the designs, a step-by-step energy account, the patch, replays of the robots the benchmark's authors released, and a check that reproduces every number."
+authors:
+  - family-names: Bogdan
+    given-names: Philipp
+date-released: 2026-11-11
+url: "https://github.com/philippbogdan/evogym-jumper-loophole"
+repository-code: "https://github.com/philippbogdan/evogym-jumper-loophole"
+license: CC0-1.0
+keywords:
+  - soft robotics
+  - co-design
+  - benchmarks
+  - physics simulation
+  - contact
+  - specification gaming
+references:
+  - type: conference-paper
+    title: "Evolution Gym: A Large-Scale Benchmark for Evolving Soft Robots"
+    authors:
+      - family-names: Bhatia
+        given-names: Jagdeep Singh
+      - family-names: Jackson
+        given-names: Holly
+      - family-names: Tian
+        given-names: Yunsheng
+      - family-names: Xu
+        given-names: Jie
+      - family-names: Matusik
+        given-names: Wojciech
+    collection-title: "Advances in Neural Information Processing Systems 34"
+    year: 2021
+    url: "https://arxiv.org/abs/2201.09863"

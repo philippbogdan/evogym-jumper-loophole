@@ -1,0 +1,25 @@
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+@@ -1023,6 +1023,22 @@
+ 
+ 	//set normal forces
+ 
++	// analysis: a robot point that lies within the corners of a fixed cell and has no qualifying edge
++	// is pushed out through that cell's top edge
++	if (ref_edges_index.size() == 0 && !(*fixed)(0, p_index) && (*fixed)(0, (int)ref->points[0])
++		&& edges->at(ref->edges[0]).isOnSurface) {
++		double px = (*pos)(0, p_index), py = (*pos)(1, p_index);
++		double x0 = 0, x1 = 0, y0 = 0, y1 = 0;
++		for (int k = 0; k < ref->points.size(); k++) {
++			double qx = (*pos)(0, (int)ref->points[k]), qy = (*pos)(1, (int)ref->points[k]);
++			if (k == 0) { x0 = x1 = qx; y0 = y1 = qy; }
++			x0 = std::min(x0, qx); x1 = std::max(x1, qx); y0 = std::min(y0, qy); y1 = std::max(y1, qy);
++		}
++		if (px >= x0 && px <= x1 && py >= y0 && py <= y1) {
++			ref_edges_index.push_back(ref->edges[0]);
++			ref_edges_score.push_back(dist_point_edge(p_index, ref->edges[0]));
++		}
++	}
+ 	if (ref_edges_index.size() == 0)
+ 		return;
+ 

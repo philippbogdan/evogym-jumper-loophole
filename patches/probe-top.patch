@@ -1,0 +1,22 @@
+--- evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
++++ evogym/simulator/SimulatorCPP/PhysicsEngine.cpp
+@@ -1,4 +1,10 @@
+ #include "PhysicsEngine.h"
++
++// counting probe: how often the fallback pushes a point, and the deepest it pushes from. No arithmetic changes.
++static long evogym_fallback_count = 0;
++static double evogym_fallback_deepest = 0;
++extern "C" __attribute__((visibility("default"))) void evogym_fallback_reset() { evogym_fallback_count = 0; evogym_fallback_deepest = 0; }
++extern "C" __attribute__((visibility("default"))) void evogym_fallback_read(long* count, double* deepest) { *count = evogym_fallback_count; *deepest = evogym_fallback_deepest; }
+ 
+ #include <iostream>
+ #include <set>
+@@ -1037,6 +1043,8 @@
+ 		if (px >= x0 && px <= x1 && py >= y0 && py <= y1) {
+ 			ref_edges_index.push_back(ref->edges[0]);
+ 			ref_edges_score.push_back(dist_point_edge(p_index, ref->edges[0]));
++			evogym_fallback_count++;
++			if (ref_edges_score.back() > evogym_fallback_deepest) evogym_fallback_deepest = ref_edges_score.back();
+ 		}
+ 	}
+ 	if (ref_edges_index.size() == 0)
